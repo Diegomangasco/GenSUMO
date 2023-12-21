@@ -26,7 +26,7 @@ do
     sumo -c $scenario_name.sumo.cfg --netstate-dump netstate.xml --amitran-output amitran.xml
     chmod 777 netstate.xml
     chmod 777 amitran.xml
-    python3 tools/xml/xml2csv.py netstate.xml --output $output_file
+    python3 /usr/share/sumo/tools/xml/xml2csv.py netstate.xml --output $output_file
     chmod 777 $output_file
 
     > trips.trips.xml
