@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- debug config -->
+<launch>
+	<copy file="4Ways1Lane.net.xml" />
+	<copy file="4Ways1Lane.rou.xml" />
+	<copy file="4Ways1Lane.poly.xml" />
+	<copy file="4Ways1Lane.sumo.cfg" type="config" />
+</launch>
+
