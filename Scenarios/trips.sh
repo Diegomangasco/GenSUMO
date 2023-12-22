@@ -16,26 +16,17 @@ do
     last_file=$(ls -1 Netstate/netfile_* 2>/dev/null | sort -V | tail -n 1)
     current_last_number=$(echo $last_file | grep -oP '\d+')
     new_number=$((current_last_number + 1))
-    output_netstate="Netstate/netfile_$new_number.csv"
-
-    # Find the last amitran file inside the folder
-    last_file=$(ls -1 Amitran/amitran_* 2>/dev/null | sort -V | tail -n 1)
-    current_last_number=$(echo $last_file | grep -oP '\d+')
-    new_number=$((current_last_number + 1))
-    output_amitran="Amitran/amitran_$new_number.csv"
-
+    
     # Generate random trips
     /usr/share/sumo/tools/randomTrips.py -n $net_file -e $time
     duarouter -t trips.trips.xml -n $net_file -o cars.rou.xml
 
-    # Generate netstate  and amitran (trajectories) file
-    sumo -c $scenario_name.sumo.cfg --netstate-dump netstate.xml --amitran-output amitran.xml
+    # Generate netstate file
+    sumo -c $scenario_name.sumo.cfg --netstate-dump netstate.xml
     chmod 777 netstate.xml
-    chmod 777 amitran.xml
-    python3 /usr/share/sumo/tools/xml/xml2csv.py netstate.xml --output $output_netstate
-    chmod 777 $output_netstate
-    python3 /usr/share/sumo/tools/xml/xml2csv.py amitran.xml --output $output_amitran
-    chmod 777 $output_amitran
+
+    # Generate the dataset
+    python3 ../dataset_creation.py $new_number
 
     > trips.trips.xml
     > cars.rou.xml
