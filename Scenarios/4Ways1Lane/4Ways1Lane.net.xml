@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2023-12-22 17:56:30 by Eclipse SUMO netedit Version 1.19.0
+<!-- generated on 2023-12-29 17:17:51 by Eclipse SUMO netedit Version 1.19.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/neteditConfiguration.xsd">
 
     <input>
-        <sumo-net-file value="Scenarios/4Ways1Lane/4Ways1Lane.net.xml"/>
+        <sumo-net-file value="4Ways1Lane/4Ways1Lane.net.xml"/>
     </input>
 
     <output>
-        <output-file value="Scenarios/4Ways1Lane/4Ways1Lane.net.xml"/>
+        <output-file value="4Ways1Lane/4Ways1Lane.net.xml"/>
     </output>
 
     <processing>

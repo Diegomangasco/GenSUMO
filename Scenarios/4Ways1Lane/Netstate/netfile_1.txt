@@ -1,0 +1,5 @@
+Simulation ended at time: 700.00
+Vehicles: Inserted: 562
+Pedestrians: Inserted: 358
+Teleports: 0 (Collisions: 68)
+Emergency Braking: 69
