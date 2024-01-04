@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# ./dataset_creation.sh /home/diego-pc/Projects/GenerativeSUMO/Scenarios/ 4Ways1Lane 500 1
+
 folder=$1
 scenario_name=$2
 time=$3
@@ -7,8 +9,6 @@ iterations=$4
 cd $folder/$scenario_name
 
 net_file="$scenario_name.net.xml"
-
-python3 ../search_crossing_edges.py $net_file
 
 # Only balanced situation between different ways until now
 balanced="yes"
@@ -41,7 +41,7 @@ do
 
     # Generate random trips for pedestrians
     # P possible values
-    p_values=(0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5)
+    p_values=(0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0)
     num_options=${#p_values[@]}
     random_index=$((RANDOM % num_options))
     chosen_p=${p_values[$random_index]}
@@ -60,7 +60,9 @@ do
     grep "Collisions" logfile.txt | sed 's/^[[:space:]]*//' >> "Netstate/netfile_$new_number.txt"
     grep "Emergency" logfile.txt | sed 's/^[[:space:]]*//' >> "Netstate/netfile_$new_number.txt"
 
-    # TODO analyze netstate.xml file to retrieve information about the timestep when a collision of emergency breaking took place (see logfile.txt)
+    # TODO analyze netstate.xml in couple with logfile.txt to retrieve information about the situation when a collision or emergency breaking took place
+    # TODO also the files cars.rou.xml and pedestrians.rou.xml could be important to retrieve the story of the items in the simulation
+    # TODO First goal --> extract information/patterns to classify a simulation (or maybe not the entire simulation but only some particular situations of the simulation) in a criticality scale
     # pos=730.25 => x=730, y=25
 
 done
