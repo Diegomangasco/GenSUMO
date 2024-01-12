@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # ./dataset_creation.sh /home/diego-pc/Projects/GenerativeSUMO/Scenarios/ 4Ways1Lane 500 1
+# to reproduce
+# ./dataset_creation.sh /home/sergione/Documents/GenerativeSUMO/Scenarios/ 4Ways1Lane 100 1
 
 folder=$1
 scenario_name=$2
@@ -22,7 +24,8 @@ do
     > pedestrians.rou.alt.xml
     > trips.trips.xml
     > logfile.txt
-
+    > positions.xml
+    
     # Find the last netstate file inside the folder
     last_file=$(ls -1 Netstate/netfile_* 2>/dev/null | sort -V | tail -n 1)
     current_last_number=$(echo $last_file | grep -oP '\d+')
@@ -48,8 +51,8 @@ do
     /usr/share/sumo/tools/randomTrips.py -n $net_file -e $time --pedestrians --random -p $chosen_p
     duarouter -r trips.trips.xml -n $net_file -o pedestrians.rou.xml
 
-    # Generate netstate file
-    sumo -c $scenario_name.sumo.cfg --netstate-dump netstate.xml --collision.action warn --intermodal-collision.action warn --log logfile.txt
+    # Generate netstate file, changed to add the positionsoutputs in the positions.xml file
+    sumo -c $scenario_name.sumo.cfg --netstate-dump netstate.xml --collision.action warn --fcd-output positions.xml --log logfile.txt
 
     # Store the information to describe the simulation
     grep "Simulation ended at time:" logfile.txt > "Netstate/netfile_$new_number.txt"
@@ -60,11 +63,12 @@ do
     grep "Collisions" logfile.txt | sed 's/^[[:space:]]*//' >> "Netstate/netfile_$new_number.txt"
     grep "Emergency" logfile.txt | sed 's/^[[:space:]]*//' >> "Netstate/netfile_$new_number.txt"
 
-    # TODO analyze netstate.xml in couple with logfile.txt to retrieve information about the situation when a collision or emergency breaking took place
-    # TODO also the files cars.rou.xml and pedestrians.rou.xml could be important to retrieve the story of the items in the simulation
-    # TODO First goal --> extract information/patterns to classify a simulation (or maybe not the entire simulation but only some particular situations of the simulation) in a criticality scale
-    # pos=730.25 => x=730, y=25
+    # the following script reads logfile to find braking events (timestep + vehicle id), then opens positions.xml
+    # and retrieves time, xcoordinate, ycoordinate, speed, angle, lane and the number of vehicles within a 30.0 meter radius. 
+    # It creates data.csv that is analyzed by clustering.py. 
+    python3 braking_analyzer.py -d 30.0
 
+    echo "Iteration completed"
 done
 
 > netstate.xml
@@ -74,5 +78,6 @@ done
 > pedestrians.rou.alt.xml
 > trips.trips.xml
 > logfile.txt
+> positions.xml
 
 exit 1
