@@ -2,7 +2,7 @@
 
 # ./dataset_creation.sh /home/diego-pc/Projects/GenerativeSUMO/Scenarios/ 4Ways1Lane 500 1
 # to reproduce
-# ./dataset_creation.sh /home/sergione/Documents/GenerativeSUMO/Scenarios/ 4Ways1Lane 100 1
+# ./dataset_creation.sh /home/sergione/Documents/GenerativeSUMO/Scenarios/ 4Ways1LaneRegulated 100 1
 
 folder=$1
 scenario_name=$2
@@ -40,7 +40,7 @@ do
     # Make the random choice
     chosen_lambda=${lambda_values[$random_index]}
     # Generate random trips for vehicles
-    python3 random_trips.py -t $time -l $chosen_lambda -b $balanced
+    python3 random_trips.py -t $time -l $chosen_lambda -b $balanced 
 
     # Generate random trips for pedestrians
     # P possible values
@@ -52,7 +52,7 @@ do
     duarouter -r trips.trips.xml -n $net_file -o pedestrians.rou.xml
 
     # Generate netstate file, changed to add the positionsoutputs in the positions.xml file
-    sumo -c $scenario_name.sumo.cfg --netstate-dump netstate.xml --collision.action warn --fcd-output positions.xml --log logfile.txt
+    sumo -c $scenario_name.sumo.cfg --netstate-dump netstate.xml --collision.action warn --collision.check-junctions --fcd-output positions.xml --log logfile.txt
 
     # Store the information to describe the simulation
     grep "Simulation ended at time:" logfile.txt > "Netstate/netfile_$new_number.txt"
@@ -63,21 +63,18 @@ do
     grep "Collisions" logfile.txt | sed 's/^[[:space:]]*//' >> "Netstate/netfile_$new_number.txt"
     grep "Emergency" logfile.txt | sed 's/^[[:space:]]*//' >> "Netstate/netfile_$new_number.txt"
 
-    # the following script reads logfile to find braking events (timestep + vehicle id), then opens positions.xml
-    # and retrieves time, xcoordinate, ycoordinate, speed, angle, lane and the number of vehicles within a 30.0 meter radius. 
-    # It creates data.csv that is analyzed by clustering.py. 
-    python3 braking_analyzer.py -d 30.0
+    python3 slicer.py -i $i -d 10
 
     echo "Iteration completed"
 done
 
-> netstate.xml
-> cars.rou.xml
-> cars.rou.alt.xml
-> pedestrians.rou.xml
-> pedestrians.rou.alt.xml
-> trips.trips.xml
-> logfile.txt
-> positions.xml
+ > netstate.xml
+ > cars.rou.xml
+ > cars.rou.alt.xml
+ > pedestrians.rou.xml
+ > pedestrians.rou.alt.xml
+ > trips.trips.xml
+ > logfile.txt
+ > positions.xml
 
 exit 1
