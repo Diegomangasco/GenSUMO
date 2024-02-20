@@ -1,0 +1,49 @@
+Loading net-file from '4Ways1LaneRegulated.net.xml' ... done (2ms).
+Loading additional-files from '4Ways1Lane.poly.xml' ... done (1ms).
+Loading done.
+Simulation version 1.12.0 started with time: 0.00
+Warning: Vehicle '81' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=125.20.
+Warning: Vehicle '94' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=136.50.
+Warning: Vehicle '22' collision with person '115', lane=':5_10_0', time=137.30, stage=move.
+Warning: Vehicle '94' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=139.20.
+Warning: Vehicle '27' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=149.50.
+Warning: Vehicle '27' collision with person '142', lane=':5_15_0', time=150.00, stage=events.
+Warning: Vehicle '44' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=211.20.
+Warning: Vehicle '146' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=217.00.
+Warning: Vehicle '50'; junction collision with vehicle '240', lane=':5_5_0', gap=-1.00, time=276.40 stage=move.
+Warning: Vehicle '463' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=413.40.
+Warning: Person '116' is jammed on edge ':5_w1', time=444.30.
+Warning: Person '180' is jammed on edge ':5_w1', time=446.30.
+Warning: Person '124' is jammed on edge ':5_w1', time=447.40.
+Warning: Person '89' is jammed on edge ':5_w2', time=448.50.
+Warning: Person '102' is jammed on edge ':5_w2', time=448.80.
+Warning: Vehicle '491' collision with person '180', lane=':5_2_0', time=449.90, stage=events.
+Warning: Person '120' is jammed on edge ':5_w0', time=451.30.
+Warning: Vehicle '413' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=451.30.
+Warning: Vehicle '491' collision with person '180', lane=':5_2_0', time=454.80, stage=events.
+Warning: Vehicle '491' collision with person '124', lane=':5_2_0', time=455.00, stage=events.
+Warning: Vehicle '491' collision with person '116', lane=':5_2_0', time=455.00, stage=events.
+Warning: Vehicle '492' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=456.90.
+Warning: Vehicle '61'; junction collision with vehicle '416', lane=':5_10_0', gap=-1.00, time=459.80 stage=move.
+Warning: Vehicle '472' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=488.70.
+Warning: Vehicle '476' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=512.80.
+Warning: Vehicle '63' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=573.90.
+Simulation ended at time: 700.00
+Reason: The final simulation step has been reached.
+Performance: 
+ Duration: 38.52s
+ Real time factor: 18.1714
+ UPS: 60368.257100
+ UPS-Persons: 25305.228181
+Vehicles: 
+ Inserted: 594 (Loaded: 596)
+ Running: 228
+ Waiting: 2
+Teleports: 0 (Collisions: 8)
+Persons: 
+ Inserted: 188
+ Running: 93
+ Jammed: 6
+
+DijkstraRouter answered 40505 queries and explored 23.78 edges on average.
+DijkstraRouter spent 0.07s answering queries (0.00ms on average).
