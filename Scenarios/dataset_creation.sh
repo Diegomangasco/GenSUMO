@@ -63,10 +63,11 @@ do
     grep "Collisions" logfile.txt | sed 's/^[[:space:]]*//' >> "Netstate/netfile_$new_number.txt"
     grep "Emergency" logfile.txt | sed 's/^[[:space:]]*//' >> "Netstate/netfile_$new_number.txt"
 
-    python3 slicer.py -i $i -d 10
+    python3 slicer.py -i $i -d 3 -n 3
 
     echo "Iteration completed"
 done
+echo "xml training set crated"
 
  > netstate.xml
  > cars.rou.xml
