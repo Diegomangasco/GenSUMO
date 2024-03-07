@@ -3,16 +3,25 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import argparse
 import os
-from math import sin, cos, sqrt
+from math import cos, sqrt
+import json
+import re
+
 
 argParser = argparse.ArgumentParser()
 argParser.add_argument("-i", "--index", type=int)
 argParser.add_argument("-d", "--distance", type=float, help="radius that defines the closest vehicles", default=5.0)
+argParser.add_argument("-n", '--slices', type=int, default=3)
 
 args = vars(argParser.parse_args())
 distance = args['distance']
 index = args['index']
-print(distance, index)
+slices = args['slices']
+
+def sorted_alphanumeric(data):
+    convert = lambda text: int(text) if text.isdigit() else text.lower()
+    alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ] 
+    return sorted(data, key=alphanum_key)
 
 def vehicle_collision_gravity(v, angle1, angle2, output): 
 
@@ -54,11 +63,11 @@ def galilean_computer(v1, angle1, v2, angle2, type='pedestrian'):
         vehicle_collision_gravity(v, angle1, angle2, output)   
     else: 
         output['module'] = v1
-        if output['module'] <= 10.0: 
+        if output['module'] <= 8.0: 
             output['gravity'] = 'low'
-        elif 10.0 < output['module'] <= 15.0: 
+        elif 8.0 < output['module'] <= 12.5: 
             output['gravity'] = 'medium'
-        elif 15.0< output['module']: 
+        elif 12.5< output['module']: 
             output['gravity'] = 'high'
 
     return output
@@ -124,7 +133,7 @@ def happened_events(data):
     list_of_events['vehicle-vehicle'] = {'frontal':{'low':0, 'medium':0, 'high':0}, 'rear':{'low':0, 'medium':0, 'high':0}, 'lateral':{'low':0, 'medium':0, 'high':0}, 
                                          'lateral_driver':{'low':0, 'medium':0, 'high':0}}
     list_of_events['vehicle-pedestrian'] = {'low':0, 'medium':0, 'high':0}
-    list_of_events['braking'] = {'low':0, 'medium':0}
+    list_of_events['braking'] = {'low':0, 'medium':0, 'high':0}
     
     for el in data:
 
@@ -147,33 +156,48 @@ def happened_events(data):
         else:
             if el['speed_braking_vehicle'] <= 5: 
                 list_of_events['braking']['low'] += 1
-            else: 
+            elif 5< el['speed_braking_vehicle'] <= 10: 
                 list_of_events['braking']['medium'] +=1
+            else: 
+                list_of_events['braking']['high'] += 1
 
     return list_of_events
 
 def xml_data_writer(data, folder_path):
     tree = ET.parse('positions.xml')
     root = tree.getroot()
+    time_slashes = [data[0]['time']-distance*k for k in range(1, slices+1)]
     for timestamp in root:
-        if float(timestamp.attrib['time']) == data[0]['time'] - distance:
-            filename = f'simulation:{index}'
-            print(filename)
+        if float(timestamp.attrib['time']) in time_slashes:
+            index_i = time_slashes.index(float(timestamp.attrib['time']))
+            filename = f'simulation:{index} slice:{index_i}'
             tree = ET.ElementTree(timestamp)
             tree.write(os.path.join(folder_path, filename))     
 
-def label_writer(data, folder_path='labels'): 
-    with open(folder_path, 'a') as fp: 
-        fp.write(str(data)+'\n')
+def label_writer(data, folder_path): 
+    path = os.path.join(folder_path,f'simulation: {index}')
+    with open(path, 'w') as fp: 
+        json.dump(data, fp)
 
 if __name__ == '__main__': 
+
     #Create the folder if it doesn't exist
-    folder_path_train = './xml_data_train'
+    folder_path_train = os.getcwd()+'/xml_data_train'
     if not os.path.exists(folder_path_train):
        os.makedirs(folder_path_train)
+    
+    folder_path_labels = os.getcwd() +'/labels'
+    if not os.path.exists(folder_path_labels):
+        os.makedirs(folder_path_labels) 
+
+    last_obtained = sorted_alphanumeric(os.listdir('xml_data_train'))
+    if len(last_obtained) > 0:
+        regex_string = r"simulation:(\d+) slice:(\d+)"
+        matches = re.search(regex_string, last_obtained[-1])
+        index = int(matches.group(1)) + 1
 
     vehicles = logflie_getter()
     xml_data_writer(vehicles, folder_path=folder_path_train)
 
     data = happened_events(vehicles)
-    label_writer(data)
+    label_writer(data, folder_path_labels)
