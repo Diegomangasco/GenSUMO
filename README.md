@@ -1,4 +1,4 @@
-# GenerativeSUMO
+# GenSUMO
 Generative AI to create synthetic SUMO scenarios
 
 currently added a first dataset creation tool: breaking_analyzer.py that constructs a csv file: 
