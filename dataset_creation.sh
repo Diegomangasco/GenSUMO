@@ -1,14 +1,14 @@
 #!/bin/bash
-
 # ./dataset_creation.sh /home/diego-pc/Projects/GenerativeSUMO/Scenarios/ 4Ways1Lane 500 1
 # to reproduce
-# ./dataset_creation.sh /home/sergione/Documents/GenerativeSUMO/Scenarios/ 4Ways1LaneRegulated 100 1
+# ./dataset_creation.sh /home/sergione/Documents/GenerativeSUMO/Scenarios/ 4Ways1LaneRegulated  simulationdata 75 1
 
 folder=$1
 scenario_name=$2
-time=$3
-iterations=$4
-cd $folder/$scenario_name
+scenario_folder=$3
+time=$4
+iterations=$5
+cd $folder/$scenario_name/$scenario_folder
 
 net_file="$scenario_name.net.xml"
 
@@ -41,6 +41,7 @@ do
     chosen_lambda=${lambda_values[$random_index]}
     # Generate random trips for vehicles
     python3 random_trips.py -t $time -l $chosen_lambda -b $balanced 
+    # python3 fixed_trips.py -l 100
 
     # Generate random trips for pedestrians
     # P possible values
@@ -48,11 +49,11 @@ do
     num_options=${#p_values[@]}
     random_index=$((RANDOM % num_options))
     chosen_p=${p_values[$random_index]}
-    /usr/share/sumo/tools/randomTrips.py -n $net_file -e $time --pedestrians --random -p $chosen_p
+    /usr/share/sumo/tools/randomTrips.py -n $net_file -e $time --pedestrians --random -p $chosen_p # this is the line to modify to provide the pedestrians
     duarouter -r trips.trips.xml -n $net_file -o pedestrians.rou.xml
 
     # Generate netstate file, changed to add the positionsoutputs in the positions.xml file
-    sumo -c $scenario_name.sumo.cfg --netstate-dump netstate.xml --collision.action warn --collision.check-junctions --fcd-output positions.xml --log logfile.txt
+    sumo -c $scenario_name.sumo.cfg --netstate-dump netstate.xml --collision.action warn --collision.check-junctions --fcd-output positions.xml --log logfile.txt --threads 10
 
     # Store the information to describe the simulation
     grep "Simulation ended at time:" logfile.txt > "Netstate/netfile_$new_number.txt"
@@ -63,7 +64,9 @@ do
     grep "Collisions" logfile.txt | sed 's/^[[:space:]]*//' >> "Netstate/netfile_$new_number.txt"
     grep "Emergency" logfile.txt | sed 's/^[[:space:]]*//' >> "Netstate/netfile_$new_number.txt"
 
-    python3 slicer.py -i $i -d 3 -n 3
+    cd ..
+    python3 slicer.py -i $i -n 1
+    cd $scenario_folder
 
     echo "Iteration completed"
 done

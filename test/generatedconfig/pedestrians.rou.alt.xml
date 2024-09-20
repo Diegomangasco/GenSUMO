@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2024-07-18 10:32:18 by Eclipse SUMO duarouter Version 1.12.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
+
+    <input>
+        <net-file value="4Ways1LaneRegulated.net.xml"/>
+        <route-files value="trips.trips.xml"/>
+    </input>
+
+    <output>
+        <output-file value="pedestrians.rou.xml"/>
+        <alternatives-output value="pedestrians.rou.alt.xml"/>
+    </output>
+
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+	<person id="0" depart="0.00" departPos="318.146484375">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="1" depart="0.00" departPos="248.42303466796875">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="2" depart="0.00" departPos="312.97125244140625">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="3" depart="0.00" departPos="205.63323974609375">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="4" depart="0.00" departPos="266.99383544921875">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="5" depart="0.00" departPos="201.63165283203125">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="7" depart="0.00" departPos="219.91571044921875">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="8" depart="0.00" departPos="256.35748291015625">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="9" depart="0.00" departPos="284.18914794921875">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="10" depart="0.00" departPos="253.26190185546875">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="11" depart="0.00" departPos="217.54156494140625">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="12" depart="0.00" departPos="275.45330810546875">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="14" depart="0.00" departPos="281.7918701171875">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="15" depart="0.00" departPos="269.94573974609375">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="16" depart="0.00" departPos="253.371337890625">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="17" depart="0.00" departPos="221.56304931640625">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="19" depart="0.00" departPos="194.456787109375">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="20" depart="0.00" departPos="246.92510986328125">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="21" depart="0.00" departPos="268.22705078125">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="22" depart="0.00" departPos="222.9764404296875">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="23" depart="0.00" departPos="268.93804931640625">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="24" depart="0.00" departPos="241.136474609375">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="29" depart="0.00" departPos="244.99139404296875">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="30" depart="0.00" departPos="261.30877685546875">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="31" depart="0.00" departPos="220.78265380859375">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="32" depart="0.00" departPos="199.26031494140625">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="33" depart="0.00" departPos="202.52276611328125">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="35" depart="0.00" departPos="235.95068359375">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="36" depart="0.00" departPos="265.27972412109375">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="37" depart="0.00" departPos="220.58660888671875">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="38" depart="0.00" departPos="196.286376953125">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="39" depart="0.00" departPos="206.79595947265625">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="40" depart="0.00" departPos="197.72308349609375">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="41" depart="0.00" departPos="209.16876220703125">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="43" depart="0.00" departPos="199.860595703125">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="44" depart="0.00" departPos="204.70086669921875">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="45" depart="0.00" departPos="115.40423583984375">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="46" depart="0.00" departPos="167.8861083984375">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="47" depart="0.00" departPos="160.59075927734375">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="48" depart="0.00" departPos="153.80950927734375">
+		<personTrip from="D6" to="D7" walkFactor="0.75" costs="2000"/>
+	</person>
+	<person id="49" depart="0.00" departPos="116.1947021484375">
+		<personTrip from="D1" to="D4" walkFactor="0.75" costs="2000"/>
+	</person>
+</routes>

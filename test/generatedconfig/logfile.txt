@@ -1,0 +1,26 @@
+Loading net-file from '4Ways1LaneRegulated.net.xml' ... done (1ms).
+Loading additional-files from '4Ways1Lane.poly.xml' ... done (0ms).
+Loading done.
+Simulation version 1.12.0 started with time: 0.00
+Warning: Vehicle '7' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=66.90.
+Warning: Vehicle '7' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=67.30.
+Warning: Vehicle '8' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=70.80.
+Warning: Vehicle '8' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=71.00.
+Warning: Vehicle '11' performs emergency braking with decel=-9.00 wished=5.00 severity=1.00, time=99.20.
+Simulation ended at time: 700.00
+Reason: The final simulation step has been reached.
+Performance: 
+ Duration: 1.99s
+ Real time factor: 351.406
+ UPS: 40922.188755
+ UPS-Persons: 122590.361446
+Vehicles: 
+ Inserted: 50
+ Running: 0
+ Waiting: 0
+Persons: 
+ Inserted: 41
+ Running: 4
+
+DijkstraRouter answered 224 queries and explored 22.20 edges on average.
+DijkstraRouter spent 0.00s answering queries (0.00ms on average).

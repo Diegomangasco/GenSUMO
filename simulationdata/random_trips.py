@@ -23,10 +23,11 @@ else:
     assert len(lambda_params) == WAYS
     number_of_departs = np.array([np.random.poisson(lam=float(lambda_params[i]), size=seconds) for i in range(WAYS)])
 
+# "<vType accel='2.6' decel='5.0' id='CarA' maxSpeed='14.0' minGap='1.0' sigma='0.5' speedfactor='norm(2,2)' jmIgnoreKeepClearTime='0.1' jmIgnoreJunctionFoeProb='1.0' jmIgnoreFoeProb='0.4'/>" "\n"
 with open("cars.rou.xml", "w") as fp:
     fp.writelines(
         "<routes>" + "\n" +
-        "<vType accel='2.6' decel='5.0' id='CarA' maxSpeed='14.0' minGap='2.0' sigma='0.5'/>" + "\n" +
+        "<vType accel='7.0' decel='5.0' id='CarA' maxSpeed='18.0' minGap='2.5' sigma='0.5' jmIgnoreJunctionFoeProb='0.6'/>" "\n" +
         "<route id='route1' edges='D5 D6' /> <!-- W2E -->" + "\n" +
         "<route id='route2' edges='D7 D8' /> <!-- E2W -->" + "\n" +
         "<route id='route3' edges='D1 D2' /> <!-- S2N -->" + "\n" +

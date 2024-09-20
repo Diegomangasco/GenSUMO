@@ -16,6 +16,8 @@ args = vars(argParser.parse_args())
 index = args['index']
 slices = args['slices']
 
+path_to_positions = 'simulationdata/positions.xml'
+path_to_logfile = 'simulationdata/logfile.txt'
 
 def sorted_alphanumeric(data):
     convert = lambda text: int(text) if text.isdigit() else text.lower()
@@ -39,16 +41,16 @@ def vehicle_collision_gravity(v, angle1, angle2, output):
         else: 
             output['lateral_driver'] = 'high'
     elif -10 <= angle1 - angle2 <= 10:
-        if v <= 7:
+        if v <= 10.0:
             output['rear'] = 'low'
-        elif 7 < v <= 14: 
+        elif 10.0 < v <= 15: 
             output['rear'] = 'medium'
         else: 
             output['rear'] = 'high'
     elif 170 <= angle1-angle2 <= 190:
         if v <= 7:
             output['frontal'] = 'low'
-        elif 10 < v <= 12.5: 
+        elif 7 < v <= 12.5: 
             output['frontal'] = 'medium'
         else: 
             output['frontal'] = 'high'
@@ -78,8 +80,8 @@ def logflie_getter():
 
     vehicles_id = []
 
-    with open('logfile.txt', 'r') as f: 
-        t = 0
+    with open(path_to_logfile, 'r') as f: 
+        #t = 0
         time = 0
         for row in f: 
             if row[0] == 'W':
@@ -99,7 +101,7 @@ def logflie_getter():
     return vehicles_id
 
 def velocities_getter(data): 
-    tree = ET.parse('positions.xml')
+    tree = ET.parse(path_to_positions)
     root = tree.getroot()
     data = [data]
     for timestamp in root:
@@ -163,7 +165,7 @@ def happened_events(vehicles):
     return list_of_events
 
 def xml_data_writer(data, folder_path):
-    tree = ET.parse('positions.xml')
+    tree = ET.parse(path_to_positions)
     root = tree.getroot()
     # time_slashes = [data[0]['time']-slices*k for k in range(1, slices+1)]
     collisions = []
@@ -188,7 +190,6 @@ def xml_data_writer(data, folder_path):
                 
                 index_i += 1  
       
-
 def label_writer(data, folder_path): 
     path = os.path.join(folder_path,f'simulation: {index}')
     with open(path, 'w') as fp: 
@@ -213,6 +214,7 @@ if __name__ == '__main__':
         index = int(matches.group(1)) + 1
 
     vehicles = logflie_getter()
+    data = happened_events(vehicles)
 
     xml_data_writer(vehicles, folder_path=folder_path_train)
-    # label_writer(data, folder_path_labels)
+    label_writer(data, folder_path_labels)
